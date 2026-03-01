@@ -1,0 +1,588 @@
+{
+  "assetCategories": {
+    "decal": {
+      "street": {
+        "painted line": {}
+      }
+    }
+  },
+  "averageColor": "#000000",
+  "categories": [
+    "atlas",
+    "decals",
+    "painted line"
+  ],
+  "comp_version": 1,
+  "description": "",
+  "displacementBias": 0.475642,
+  "displacementCalibrationAccuracy": 0.991322,
+  "displacementScale": 0.509104,
+  "environment": {
+    "biome": "undefined",
+    "region": "Asia"
+  },
+  "highest_available_res": 8192,
+  "id": "veggehh",
+  "json": {
+    "contentLength": 12527,
+    "uri": "veggehh.json"
+  },
+  "maps": [
+    {
+      "averageColor": "#E3E3E3",
+      "bitDepth": 32,
+      "colorSpace": "sRGB",
+      "contentLength": 128883846,
+      "maxIntensity": 255,
+      "mimeType": "image/x-exr",
+      "minIntensity": 190,
+      "name": "AO",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "ao",
+      "uri": "veggehh_8K_AO.exr"
+    },
+    {
+      "averageColor": "#E3E3E3",
+      "bitDepth": 8,
+      "colorSpace": "sRGB",
+      "contentLength": 13271667,
+      "maxIntensity": 255,
+      "mimeType": "image/jpeg",
+      "minIntensity": 190,
+      "name": "AO",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "ao",
+      "uri": "veggehh_8K_AO.jpg"
+    },
+    {
+      "averageColor": "#7F7E7C",
+      "bitDepth": 16,
+      "colorSpace": "sRGB",
+      "contentLength": 120455507,
+      "maxIntensity": 195,
+      "mimeType": "image/x-exr",
+      "minIntensity": 77,
+      "name": "Basecolor",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "basecolor",
+      "uri": "veggehh_8K_Basecolor.exr"
+    },
+    {
+      "averageColor": "#7F7E7C",
+      "bitDepth": 8,
+      "colorSpace": "sRGB",
+      "contentLength": 20419195,
+      "maxIntensity": 195,
+      "mimeType": "image/jpeg",
+      "minIntensity": 77,
+      "name": "Basecolor",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "basecolor",
+      "uri": "veggehh_8K_Basecolor.jpg"
+    },
+    {
+      "averageColor": "#808080",
+      "bitDepth": 32,
+      "colorSpace": "Linear",
+      "contentLength": 157737673,
+      "maxIntensity": 255,
+      "mimeType": "image/x-exr",
+      "minIntensity": 0,
+      "name": "Bump",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "bump",
+      "uri": "veggehh_8K_Bump.exr"
+    },
+    {
+      "averageColor": "#808080",
+      "bitDepth": 8,
+      "colorSpace": "Linear",
+      "contentLength": 15379073,
+      "maxIntensity": 255,
+      "mimeType": "image/jpeg",
+      "minIntensity": 0,
+      "name": "Bump",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "bump",
+      "uri": "veggehh_8K_Bump.jpg"
+    },
+    {
+      "averageColor": "#FFFFFF",
+      "bitDepth": 32,
+      "colorSpace": "sRGB",
+      "contentLength": 153673049,
+      "maxIntensity": 255,
+      "mimeType": "image/x-exr",
+      "minIntensity": 255,
+      "name": "Cavity",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "cavity",
+      "uri": "veggehh_8K_Cavity.exr"
+    },
+    {
+      "averageColor": "#FFFFFF",
+      "bitDepth": 8,
+      "colorSpace": "sRGB",
+      "contentLength": 18515313,
+      "maxIntensity": 255,
+      "mimeType": "image/jpeg",
+      "minIntensity": 255,
+      "name": "Cavity",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "cavity",
+      "uri": "veggehh_8K_Cavity.jpg"
+    },
+    {
+      "averageColor": "#808080",
+      "bitDepth": 32,
+      "colorSpace": "Linear",
+      "contentLength": 182073755,
+      "maxIntensity": 132,
+      "mimeType": "image/x-exr",
+      "minIntensity": 126,
+      "name": "Displacement",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "displacement",
+      "uri": "veggehh_8K_Displacement.exr"
+    },
+    {
+      "averageColor": "#808080",
+      "bitDepth": 8,
+      "colorSpace": "Linear",
+      "contentLength": 3655338,
+      "maxIntensity": 132,
+      "mimeType": "image/jpeg",
+      "minIntensity": 126,
+      "name": "Displacement",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "displacement",
+      "uri": "veggehh_8K_Displacement.jpg"
+    },
+    {
+      "averageColor": "#343434",
+      "bitDepth": 32,
+      "colorSpace": "Linear",
+      "contentLength": 131423318,
+      "maxIntensity": 78,
+      "mimeType": "image/x-exr",
+      "minIntensity": 39,
+      "name": "Gloss",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "gloss",
+      "uri": "veggehh_8K_Gloss.exr"
+    },
+    {
+      "averageColor": "#343434",
+      "bitDepth": 8,
+      "colorSpace": "Linear",
+      "contentLength": 13110251,
+      "maxIntensity": 78,
+      "mimeType": "image/jpeg",
+      "minIntensity": 39,
+      "name": "Gloss",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "gloss",
+      "uri": "veggehh_8K_Gloss.jpg"
+    },
+    {
+      "averageColor": "#8082FB",
+      "bitDepth": 16,
+      "colorSpace": "Linear",
+      "contentLength": 77958703,
+      "maxIntensity": 160,
+      "mimeType": "image/x-exr",
+      "minIntensity": 124,
+      "name": "Normal",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "normal",
+      "uri": "veggehh_8K_Normal.exr"
+    },
+    {
+      "averageColor": "#8082FB",
+      "bitDepth": 8,
+      "colorSpace": "Linear",
+      "contentLength": 25183261,
+      "maxIntensity": 160,
+      "mimeType": "image/jpeg",
+      "minIntensity": 124,
+      "name": "Normal",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "normal",
+      "uri": "veggehh_8K_Normal.jpg"
+    },
+    {
+      "averageColor": "#2B2B2B",
+      "bitDepth": 32,
+      "colorSpace": "Linear",
+      "contentLength": 5953577,
+      "maxIntensity": 255,
+      "mimeType": "image/x-exr",
+      "minIntensity": 0,
+      "name": "Opacity",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "opacity",
+      "uri": "veggehh_8K_Opacity.exr"
+    },
+    {
+      "averageColor": "#2B2B2B",
+      "bitDepth": 8,
+      "colorSpace": "Linear",
+      "contentLength": 8632228,
+      "maxIntensity": 255,
+      "mimeType": "image/jpeg",
+      "minIntensity": 0,
+      "name": "Opacity",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "opacity",
+      "uri": "veggehh_8K_Opacity.jpg"
+    },
+    {
+      "averageColor": "#CBCBCB",
+      "bitDepth": 32,
+      "colorSpace": "Linear",
+      "contentLength": 130226831,
+      "maxIntensity": 216,
+      "mimeType": "image/x-exr",
+      "minIntensity": 177,
+      "name": "Roughness",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "roughness",
+      "uri": "veggehh_8K_Roughness.exr"
+    },
+    {
+      "averageColor": "#CBCBCB",
+      "bitDepth": 8,
+      "colorSpace": "Linear",
+      "contentLength": 12780547,
+      "maxIntensity": 216,
+      "mimeType": "image/jpeg",
+      "minIntensity": 177,
+      "name": "Roughness",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "roughness",
+      "uri": "veggehh_8K_Roughness.jpg"
+    },
+    {
+      "averageColor": "#383838",
+      "bitDepth": 16,
+      "colorSpace": "sRGB",
+      "contentLength": 90759857,
+      "maxIntensity": 56,
+      "mimeType": "image/x-exr",
+      "minIntensity": 56,
+      "name": "Specular",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "specular",
+      "uri": "veggehh_8K_Specular.exr"
+    },
+    {
+      "averageColor": "#383838",
+      "bitDepth": 8,
+      "colorSpace": "sRGB",
+      "contentLength": 10276926,
+      "maxIntensity": 56,
+      "mimeType": "image/jpeg",
+      "minIntensity": 56,
+      "name": "Specular",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "specular",
+      "uri": "veggehh_8K_Specular.jpg"
+    }
+  ],
+  "meta": [
+    {
+      "key": "scanArea",
+      "name": "Scan Area",
+      "value": "2x2 m"
+    },
+    {
+      "key": "height",
+      "name": "Height",
+      "value": "0.001 m"
+    },
+    {
+      "key": "tileable",
+      "name": "Tileable",
+      "value": false
+    },
+    {
+      "key": "tiling_directions",
+      "name": "Tiling Directions",
+      "value": []
+    },
+    {
+      "key": "texelDensity",
+      "name": "Texel Density",
+      "value": "4096 px/m"
+    },
+    {
+      "key": "calibration",
+      "name": "Calibration",
+      "value": "GretagMacbeth ColorChecker Color Rendition Chart"
+    },
+    {
+      "key": "scanner",
+      "name": "Scanner",
+      "value": "MKX"
+    }
+  ],
+  "models": [],
+  "name": "Painted Pedestrian Crossing Lines",
+  "pack": {
+    "_id": "roadside-construction",
+    "name": "Roadside Construction"
+  },
+  "physicalSize": null,
+  "points": 1,
+  "previews": {
+    "images": [
+      {
+        "contentLength": 144823,
+        "resolution": "360x360",
+        "tags": [
+          "thumb"
+        ],
+        "uri": "veggehh_Grid_360.png"
+      },
+      {
+        "contentLength": 189020,
+        "resolution": "420x420",
+        "tags": [
+          "thumb"
+        ],
+        "uri": "veggehh_Grid_420.png"
+      },
+      {
+        "contentLength": 499889,
+        "resolution": "720x720",
+        "tags": [
+          "thumb",
+          "retina"
+        ],
+        "uri": "veggehh_Grid_720.png"
+      },
+      {
+        "contentLength": 661000,
+        "resolution": "840x840",
+        "tags": [
+          "thumb",
+          "retina"
+        ],
+        "uri": "veggehh_Grid_840.png"
+      },
+      {
+        "contentLength": 1779879,
+        "resolution": "1440x768",
+        "tags": [
+          "preview",
+          "clay"
+        ],
+        "uri": "veggehh_PopupClay_1440.png"
+      },
+      {
+        "contentLength": 3273428,
+        "resolution": "1920x1080",
+        "tags": [
+          "preview",
+          "clay"
+        ],
+        "uri": "veggehh_PopupClay_1920.png"
+      },
+      {
+        "contentLength": 6876682,
+        "resolution": "2880x1536",
+        "tags": [
+          "preview",
+          "clay",
+          "retina"
+        ],
+        "uri": "veggehh_PopupClay_2880.png"
+      },
+      {
+        "contentLength": 12184179,
+        "resolution": "3840x2160",
+        "tags": [
+          "preview",
+          "clay",
+          "retina"
+        ],
+        "uri": "veggehh_PopupClay_3840.png"
+      },
+      {
+        "contentLength": 1734878,
+        "resolution": "1440x768",
+        "tags": [
+          "preview"
+        ],
+        "uri": "veggehh_Popup_1440.png"
+      },
+      {
+        "contentLength": 3207077,
+        "resolution": "1920x1080",
+        "tags": [
+          "preview"
+        ],
+        "uri": "veggehh_Popup_1920.png"
+      },
+      {
+        "contentLength": 6685946,
+        "resolution": "2880x1536",
+        "tags": [
+          "preview",
+          "retina"
+        ],
+        "uri": "veggehh_Popup_2880.png"
+      },
+      {
+        "contentLength": 12346500,
+        "resolution": "3840x2160",
+        "tags": [
+          "preview",
+          "retina"
+        ],
+        "uri": "veggehh_Popup_3840.png"
+      }
+    ],
+    "relativeSize": "1x1",
+    "scaleReferences": []
+  },
+  "process_date": "2024-04-16 23:15:15",
+  "properties": [],
+  "referencePreviews": {
+    "maps": [],
+    "models": []
+  },
+  "references": [],
+  "revised": false,
+  "revision": 0,
+  "semanticTags": {
+    "architectural_style": {},
+    "asset_type": "decal",
+    "color": [
+      "White"
+    ],
+    "contains": [
+      "zebra-crossing",
+      "crosswalk",
+      "paint",
+      "cracks",
+      "dirt"
+    ],
+    "country": "Japan",
+    "descriptive": [
+      "worn",
+      "weathered",
+      "old",
+      "painted",
+      "faded",
+      "eroded"
+    ],
+    "environment": [
+      "urban"
+    ],
+    "industry": [
+      "archviz",
+      "games",
+      "VFX"
+    ],
+    "interior_exterior": [
+      "exterior"
+    ],
+    "locations": {
+      "Asia": {
+        "Japan": {}
+      }
+    },
+    "maxSize": 2,
+    "minSize": 2,
+    "name": "Painted Pedestrian Crossing Lines",
+    "orientation": [
+      "floor"
+    ],
+    "region": "Asia",
+    "resolution": 8192,
+    "state": [
+      "old",
+      "damaged"
+    ],
+    "subject_matter": "manmade",
+    "theme": [
+      "urban",
+      "city",
+      "streets",
+      "roads",
+      "town",
+      "traffic-markings",
+      "road-markings",
+      "highway"
+    ]
+  },
+  "tags": [
+    "decal",
+    "street",
+    "urban",
+    "road",
+    "paint",
+    "dirt",
+    "old",
+    "worn",
+    "faded"
+  ],
+  "texelDensity": 4096,
+  "texture_type": "basic",
+  "ue_plugin_archives": [
+    {
+      "contentLength": 106938727,
+      "gltfVersion": "2.0",
+      "tier": 0,
+      "type": "gltf",
+      "uri": "ue_plugin_archives/tier_0/veggehh_tier_0.zip",
+      "version": 1
+    },
+    {
+      "contentLength": 37972507,
+      "gltfVersion": "2.0",
+      "tier": 1,
+      "type": "gltf",
+      "uri": "ue_plugin_archives/tier_1/veggehh_tier_1.zip",
+      "version": 1
+    },
+    {
+      "contentLength": 9882823,
+      "gltfVersion": "2.0",
+      "tier": 2,
+      "type": "gltf",
+      "uri": "ue_plugin_archives/tier_2/veggehh_tier_2.zip",
+      "version": 1
+    },
+    {
+      "contentLength": 1608074,
+      "gltfVersion": "2.0",
+      "tier": 3,
+      "type": "gltf",
+      "uri": "ue_plugin_archives/tier_3/veggehh_tier_3.zip",
+      "version": 1
+    }
+  ],
+  "version": 2
+}
