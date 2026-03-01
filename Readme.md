@@ -1,239 +1,274 @@
-# 🎮 SMTP Workshop – Email Notification Integration in Unity
+# SMTP Workshop – Email Notification Integration in Unity
 
-## 📌 Description
+## Overview
 
-This project is a mini-game developed in Unity that integrates an email notification system using the SMTP protocol.
+This project demonstrates the integration of an email notification system in Unity using the SMTP protocol. The implementation focuses on proper architectural separation between UI, business logic, and infrastructure layers.
 
-The main objective is to demonstrate proper integration between:
+## Event that Triggers the Notification
 
-- 🎮 Game logic
-- 🖥 User interface (Unity UI)
-- 🧠 Dynamic message generation
-- 📧 Real email sending via SMTP
-- 🔁 Server response handling
+The notification is triggered when a user requests an OTP (One-Time Password) code to start the game.
 
-The focus was not on game complexity, but on the correct functional integration of the notification system.
+### User Flow
 
-## 🎯 Notification Trigger Event
+| Step | Action | Component | Result |
+|------|--------|-----------|--------|
+| 1 | User enters email address | `emailInput` (TMP_InputField) | Email stored in input field |
+| 2 | User clicks "Send OTP" button | `SendOTP()` method | Triggers OTP generation |
+| 3 | System generates 6-digit code | `OTPService.GenerateOTP()` | Random code created (100000-999999) |
+| 4 | Email is constructed | `OTPManager` | Subject and body prepared |
+| 5 | Email sent via SMTP | `EmailService.SendEmail()` | Message transmitted to server |
+| 6 | Status displayed to user | `statusText` (TMP_Text) | Success or error message shown |
+| 7 | User receives email | Mail server | OTP code delivered |
+| 8 | User enters received code | `otpInput` (TMP_InputField) | Code ready for validation |
+| 9 | User clicks "Validate" | `ValidateOTP()` method | Code checked against stored value |
+| 10 | Game access granted/denied | `startGameButton` state | Button enabled if valid |
 
-The event that triggers the notification is:
+**Key Implementation Details:**
 
-✅ **Generation and validation of an OTP code to start the game.**
+```csharp
+public void SendOTP()
+{
+    string generatedOTP = otpService.GenerateOTP();
+    string subject = "Tu código OTP";
+    string body = "Tu código es: " + generatedOTP;
+    
+    EmailResult result = emailService.SendEmail(emailInput.text, subject, body);
+    
+    if (result.Success)
+    {
+        statusText.text = "Éxito (" + result.StatusCode + ")";
+    }
+    else
+    {
+        statusText.text = "Error (" + result.StatusCode + ")";
+    }
+}
+```
 
-When the user:
-1. Enters their email
-2. Presses the button to generate the event
-3. An OTP code is dynamically generated
-4. An email with the code is automatically sent
+The OTP code is dynamically generated on each request and expires after 2 minutes.
 
-## 🧱 Project Architecture
+## Basic SMTP Sending Flow
 
-A responsibility-based separation architecture was implemented, dividing the system into three main layers:
+The email sending process is handled by the `EmailService` class and follows these steps:
+
+### Flow Diagram
 
 ```
-UI Layer
-   ↓
-Business Logic Layer
-   ↓
-Infrastructure Layer
+1. Create MailMessage object
+   - Set sender (fromEmail)
+   - Set recipient (toEmail)
+   - Set subject and body
+   
+2. Configure SmtpClient
+   - Server: smtp.gmail.com
+   - Port: 587
+   - Enable SSL: true
+   - Set credentials
+   
+3. Send message
+   - Call smtp.Send(mail)
+   - Wait for server response
+   
+4. Return result
+   - Success: EmailResult with status 250
+   - Error: EmailResult with error code and message
 ```
 
-### 📂 Folder Structure
+### Implementation
+
+```csharp
+public EmailResult SendEmail(string toEmail, string subject, string body)
+{
+    try
+    {
+        MailMessage mail = new MailMessage();
+        mail.From = new MailAddress(fromEmail);
+        mail.To.Add(toEmail);
+        mail.Subject = subject;
+        mail.Body = body;
+
+        SmtpClient smtp = new SmtpClient("smtp.gmail.com")
+        {
+            Port = 587,
+            Credentials = new NetworkCredential(fromEmail, password),
+            EnableSsl = true
+        };
+
+        smtp.Send(mail);
+        return new EmailResult(true, 250, "Correo enviado correctamente");
+    }
+    catch (SmtpException smtpEx)
+    {
+        Debug.Log("SMTP ERROR: " + smtpEx.Message);
+        int code = (int)smtpEx.StatusCode;
+        return new EmailResult(false, code, smtpEx.Message);
+    }
+    catch (Exception ex)
+    {
+        Debug.Log("GENERAL ERROR: " + ex.Message);
+        return new EmailResult(false, 500, "Error interno: " + ex.Message);
+    }
+}
+```
+
+**Configuration Parameters:**
+- Protocol: SMTP
+- Port: 587 (TLS)
+- SSL/TLS: Enabled
+- Authentication: NetworkCredential
+- Server: smtp.gmail.com
+
+## Server Response Handling
+
+The system implements structured error handling through the `EmailResult` class to manage different SMTP server responses.
+
+### EmailResult Structure
+
+```csharp
+public class EmailResult
+{
+    public bool Success;
+    public int StatusCode;
+    public string Message;
+
+    public EmailResult(bool success, int statusCode, string message)
+    {
+        Success = success;
+        StatusCode = statusCode;
+        Message = message;
+    }
+}
+```
+
+### Response Handling Logic
+
+**Success Response:**
+- Status Code: `250` (Message sent successfully)
+- Returns: `EmailResult(true, 250, "Correo enviado correctamente")`
+
+**Error Responses:**
+
+| Status Code | Description | Cause |
+|-------------|-------------|-------|
+| 535 | Authentication failure | Invalid credentials or app password |
+| 550 | Mailbox unavailable | Recipient email address rejected |
+| 500 | Internal server error | Server-side processing error |
+| Others | Various SMTP errors | Network issues, timeouts, etc. |
+
+### Exception Handling Implementation
+
+The service implements a two-tier exception handling strategy:
+
+```csharp
+try
+{
+    smtp.Send(mail);
+    return new EmailResult(true, 250, "Correo enviado correctamente");
+}
+catch (SmtpException smtpEx)
+{
+    Debug.Log("SMTP ERROR: " + smtpEx.Message);
+    int code = (int)smtpEx.StatusCode;
+    return new EmailResult(false, code, smtpEx.Message);
+}
+catch (Exception ex)
+{
+    Debug.Log("GENERAL ERROR: " + ex.Message);
+    return new EmailResult(false, 500, "Error interno: " + ex.Message);
+}
+```
+
+**Handling Strategy:**
+
+1. **SmtpException**: Captures SMTP-specific errors and extracts the status code from the exception
+2. **General Exception**: Catches any other errors (network, configuration, etc.) and returns status code 500
+
+### UI Feedback
+
+The result is displayed to the user through the UI layer:
+
+```csharp
+EmailResult result = emailService.SendEmail(emailInput.text, subject, body);
+
+if (result.Success)
+{
+    statusText.text = "Éxito (" + result.StatusCode + ")";
+}
+else
+{
+    statusText.text = "Error (" + result.StatusCode + ")";
+}
+```
+
+This structured approach allows the UI to provide immediate, specific feedback based on the SMTP server's response.
+
+## Project Architecture
+
+The implementation follows a layered architecture pattern with clear separation of concerns:
+
+### Architecture Layers
+
+**UI Layer** - `OTPManager.cs`
+- Manages Unity UI components (TMP_InputField, Button, TMP_Text)
+- Handles user interactions through button events
+- Displays success/error messages and controls game access
+- Coordinates between business and infrastructure layers
+
+**Business Logic Layer** - `OTPService.cs`
+- Generates random 6-digit OTP codes using `Random.Next(100000, 999999)`
+- Validates user-entered codes against stored value
+- Manages code expiration (2-minute timeout)
+- Tracks generation time for validation
+
+**Infrastructure Layer** - `EmailService.cs`
+- Establishes SMTP connection with Gmail servers
+- Constructs and sends MailMessage objects
+- Handles authentication and SSL/TLS configuration
+- Returns structured responses via `EmailResult.cs`
+
+**Data Transfer Object** - `EmailResult.cs`
+- Encapsulates email operation results
+- Contains success status, SMTP status code, and descriptive message
+- Enables structured error handling across layers
+
+### Class Interactions
+
+```
+User Input → OTPManager → OTPService.GenerateOTP()
+                ↓
+         EmailService.SendEmail()
+                ↓
+         SMTP Server Response
+                ↓
+         EmailResult Object
+                ↓
+         UI Status Update
+```
+
+## Folder Structure
 
 ```
 Assets/
  └── Scripts/
       ├── UI/
-      │     └── OTPManager.cs
-      ├── Services/
-      │     ├── OTPService.cs
-      │     ├── EmailService.cs
-      │     └── EmailResult.cs
+      │   └── OTPManager.cs
+      └── Services/
+          ├── OTPService.cs
+          ├── EmailService.cs
+          └── EmailResult.cs
 ```
 
-### 🏗 Separation of Responsibilities
+## Technologies
 
-| Class | Responsibility |
-|-------|----------------|
-| `OTPManager` | Controls the interface and flow |
-| `OTPService` | Generates and validates the OTP code |
-| `EmailService` | Manages SMTP communication |
-| `EmailResult` | Models the server response |
+- Unity 2021+
+- C# .NET
+- System.Net.Mail library
+- SMTP protocol
 
-## 🔄 General System Flow
-
-### 📊 Event Diagram
-
-```
-[ User ]
-     ↓
-Enters email
-     ↓
-Presses "Send OTP"
-     ↓
-[ OTPManager ]
-     ↓
-Generates dynamic code
-     ↓
-[ OTPService ]
-     ↓
-Returns OTP
-     ↓
-[ EmailService ]
-     ↓
-SMTP Connection
-     ↓
-Mail server
-     ↓
-Response (success or error)
-     ↓
-[ UI displays result ]
-```
-
-## 📧 Basic SMTP Sending Flow
-
-```
-Create message (MailMessage)
-        ↓
-Configure SMTP server
-        ↓
-Authentication
-        ↓
-Send message
-        ↓
-Server responds with status code
-```
-
-The project uses:
-- **Port 587**
-- **SSL enabled**
-- **Credential authentication**
-
-## 🧠 Dynamic Message Generation
-
-The subject and body of the email are dynamically constructed at runtime:
-
-**Example:**
-
-**Subject:** `Your OTP code to start the game`
-
-**Body:**
-```
-Your code is: 483921
-This code is valid for 2 minutes.
-```
-
-The OTP code changes with each execution.
-
-## 📡 Server Response Handling
-
-The system captures SMTP exceptions and converts them into structured objects (`EmailResult`).
-
-**Example handling:**
-
-- ✔ `250` → Successful sending
-- ❌ `535` → Authentication error
-- ❌ `550` → Invalid destination email
-- ❌ `500` → Internal error
-
-**Handling flow:**
-
-```
-SMTP Send()
-    ↓
-Exception?
-    ↓             ↓
-  NO             YES
-    ↓             ↓
-Return 250     Catch SmtpException
-                   ↓
-           Extract StatusCode
-                   ↓
-             Return EmailResult
-                   ↓
-           UI displays status
-```
-
-This allows clear visualization on screen whether the sending was successful or failed.
-
-## 🔎 Differences from the Base Code
-
-The provided base code performed:
-- Direct sending from a single script
-- No separation of responsibilities
-- No server response modeling
-- No logic encapsulation
-
-### 🔁 Implemented Improvements
-
-| Base Code | Current Implementation |
-|-----------|------------------------|
-| Everything in one class | Layered architecture |
-| Boolean return | Structured `EmailResult` object |
-| No detailed error handling | Specific `SmtpException` capture |
-| Logic mixed with UI | UI / Logic / Infrastructure separation |
-
-The new architecture allows:
-- ✅ Change SMTP provider without modifying the UI
-- ✅ Modify OTP logic without affecting sending
-- ✅ Easily scale the project
-
-## 🖥 User Interface
-
-The interface allows:
-- Enter destination email
-- Activate the event
-- View sending status
-- Validate OTP code
-
-**Visual flow:**
-
-```
-[ Email Input ]
-[ Send Button ]
-[ Status Message ]
-[ OTP Input ]
-[ Validate Button ]
-```
-
-## ✅ Requirements Met
-
-- ✔ Mandatory use of provided SMTP code
-- ✔ Real email sending
-- ✔ Dynamic message construction
-- ✔ Result visualization
-- ✔ Integration with game event
-- ✔ Server response handling
-- ✔ Separation of responsibilities
-
-## 🎥 Demo Video
-
-(Add link here)
-
-## 🚀 Conclusion
-
-The project demonstrates functional integration between:
-- Game logic
-- User interface
-- Dynamic message generation
-- SMTP server communication
-- Structured response handling
-
-Basic clean architecture principles were applied to improve maintainability and scalability compared to the initial base code.
-
-## 📌 Author
+## Author
 
 Angel
 
 ---
 
-## 🛠 Technologies Used
-
-- Unity
-- C#
-- SMTP Protocol
-- .NET Mail Libraries
-
-## 📝 License
-
-This project was developed as part of an academic workshop.
+**Note:** This project was developed as part of an academic workshop to demonstrate SMTP integration in game development environments.
